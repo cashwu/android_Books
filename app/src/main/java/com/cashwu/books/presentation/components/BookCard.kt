@@ -15,8 +15,13 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -53,12 +58,23 @@ fun BookCard(book: BookVM, onDeleteClick: (BookVM) -> Unit) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    book.title,
-                    style = TextStyle(fontSize = 32.sp, color = book.bookType.foregroundColor),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                Column {
+                    val title : MutableState<String> = remember { mutableStateOf(book.title) }
+                    Text(
+                        title.value,
+                        style = TextStyle(fontSize = 32.sp, color = book.bookType.foregroundColor),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    OutlinedTextField(
+                        value = title.value,
+                        textStyle = TextStyle(fontSize = 32.sp, color = book.bookType.foregroundColor),
+                        maxLines = 1,
+                        onValueChange = {
+                            title.value = it
+                        }
+                    )
+                }
                 if (book.read) {
                     Icon(
                         imageVector = Icons.Filled.Check,
