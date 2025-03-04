@@ -14,6 +14,7 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.cashwu.books.ui.theme.BooksTheme
 
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Column {
         Text(
-            text = "Hello $name!",
+            text = stringResource(R.string.greeting) + " $name!",
             modifier = modifier
         )
         Image(painterResource(R.drawable.book_jacket), "")
