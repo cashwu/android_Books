@@ -23,7 +23,7 @@ sealed class BookType(val backgroundColor: Color, val foregroundColor: Color)
 data object Fiction:BookType(Purple80, PurpleGrey40)
 data object NonFiction:BookType(Purple40, PurpleGrey80)
 
-val books: List<BookVM> = listOf(
+val books = mutableListOf(
     BookVM("Catch-22",
         author = "Joeseph Heller",
         read = true),

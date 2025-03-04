@@ -29,7 +29,10 @@ fun ListBookScreen(innerPadding: PaddingValues) {
     ) {
         books.forEach { book ->
             item {
-                BookCard(book)
+                BookCard(book) {
+                    println("delete book")
+                    books.remove(book)
+                }
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
