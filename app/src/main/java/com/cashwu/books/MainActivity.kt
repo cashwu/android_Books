@@ -19,8 +19,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             BooksTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    val books = viewModels<ListBooksViewModel>()
-                    ListBookScreen(ListBooksViewModel(), innerPadding)
+                    val booksViewModel: ListBooksViewModel by viewModels()
+                    ListBookScreen(booksViewModel, innerPadding)
                 }
             }
         }
