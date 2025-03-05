@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.cashwu.books.presentation.ListBookScreen
+import com.cashwu.books.presentation.books
 import com.cashwu.books.ui.theme.BooksTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,7 +18,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BooksTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ListBookScreen(innerPadding)
+                    ListBookScreen(books, innerPadding)
                 }
             }
         }
