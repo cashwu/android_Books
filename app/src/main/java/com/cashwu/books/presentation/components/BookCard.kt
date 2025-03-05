@@ -61,20 +61,11 @@ fun BookCard(book: BookVM, onDeleteClick: (BookVM) -> Unit) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column {
-                    var title : String by remember { mutableStateOf(book.title) }
                     Text(
-                        title,
-                        style = TextStyle(fontSize = 32.sp, color = book.bookType.foregroundColor),
+                        book.title,
+                        style = TextStyle(fontSize = 33.sp, color = book.bookType.foregroundColor),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
-                    )
-                    OutlinedTextField(
-                        value = title,
-                        textStyle = TextStyle(fontSize = 32.sp, color = book.bookType.foregroundColor),
-                        maxLines = 1,
-                        onValueChange = {
-                            title = it
-                        }
                     )
                 }
                 if (book.read) {
