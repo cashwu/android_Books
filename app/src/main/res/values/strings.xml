@@ -2,4 +2,5 @@
     <string name="app_name">Books</string>
     <string name="greeting">Hello</string>
     <string name="delete">delete</string>
+    <string name="main_heading">Books</string>
 </resources>
