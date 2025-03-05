@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.cashwu.books.presentation.list.BookVM
+import com.cashwu.books.presentation.BookVM
 
 @Composable
 fun SortOptions(

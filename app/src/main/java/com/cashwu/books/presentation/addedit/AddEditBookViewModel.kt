@@ -3,8 +3,7 @@ package com.cashwu.books.presentation.addedit
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.cashwu.books.presentation.list.BookVM
-import com.cashwu.books.presentation.addedit.AddEditBookEvent
+import com.cashwu.books.presentation.BookVM
 import com.cashwu.books.utils.addOrUpdateBook
 
 class AddEditBookViewModel() : ViewModel() {

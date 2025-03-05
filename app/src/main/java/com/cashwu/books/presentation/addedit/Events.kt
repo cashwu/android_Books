@@ -1,6 +1,6 @@
 package com.cashwu.books.presentation.addedit
 
-import com.cashwu.books.presentation.list.BookType
+import com.cashwu.books.presentation.BookType
 
 sealed interface AddEditBookEvent {
     data class EnteredAuthor(val author: String) : AddEditBookEvent

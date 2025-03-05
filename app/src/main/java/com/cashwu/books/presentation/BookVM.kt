@@ -1,11 +1,6 @@
-package com.cashwu.books.presentation.list
+package com.cashwu.books.presentation
 
 import androidx.compose.ui.graphics.Color
-import com.cashwu.books.presentation.components.BookEvent
-import com.cashwu.books.presentation.components.SortByAuthor
-import com.cashwu.books.presentation.components.SortByFictional
-import com.cashwu.books.presentation.components.SortByRead
-import com.cashwu.books.presentation.components.SortByTitle
 import com.cashwu.books.ui.theme.Purple40
 import com.cashwu.books.ui.theme.Purple80
 import com.cashwu.books.ui.theme.PurpleGrey40

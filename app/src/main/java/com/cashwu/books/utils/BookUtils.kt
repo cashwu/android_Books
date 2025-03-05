@@ -1,8 +1,8 @@
 package com.cashwu.books.utils
 
-import com.cashwu.books.presentation.list.BookVM
-import com.cashwu.books.presentation.list.Fiction
-import com.cashwu.books.presentation.list.NonFiction
+import com.cashwu.books.presentation.BookVM
+import com.cashwu.books.presentation.Fiction
+import com.cashwu.books.presentation.NonFiction
 import com.cashwu.books.presentation.components.SortByAuthor
 import com.cashwu.books.presentation.components.SortByFictional
 import com.cashwu.books.presentation.components.SortByRead

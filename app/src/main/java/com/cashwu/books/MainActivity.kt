@@ -13,7 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.cashwu.books.presentation.list.ListBookScreen
-import com.cashwu.books.presentation.ListBooksViewModel
+import com.cashwu.books.presentation.list.ListBooksViewModel
 import com.cashwu.books.presentation.addedit.AddEditBookViewModel
 import com.cashwu.books.ui.theme.BooksTheme
 import com.cashwu.books.utils.Screen

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Checkbox
@@ -16,7 +15,6 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,8 +27,8 @@ import com.cashwu.books.R
 import com.cashwu.books.presentation.addedit.AddEditBookEvent
 import com.cashwu.books.presentation.addedit.AddEditBookViewModel
 import com.cashwu.books.presentation.components.HorizontalTextRadioButton
-import com.cashwu.books.presentation.list.Fiction
-import com.cashwu.books.presentation.list.NonFiction
+import com.cashwu.books.presentation.Fiction
+import com.cashwu.books.presentation.NonFiction
 import com.cashwu.books.utils.Screen
 
 @Composable

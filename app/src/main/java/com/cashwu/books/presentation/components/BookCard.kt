@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cashwu.books.R
-import com.cashwu.books.presentation.list.BookVM
+import com.cashwu.books.presentation.BookVM
 
 /**
  *
