@@ -34,7 +34,7 @@ import com.cashwu.books.presentation.BookVM
  *
  */
 @Composable
-fun BookCard(book: BookVM, onDeleteClick: (BookVM) -> Unit) {
+fun BookCard(book: BookVM, onDeleteClick: (BookVM) -> Unit, modifier: Modifier) {
 
     Box(
         modifier = Modifier
@@ -44,6 +44,7 @@ fun BookCard(book: BookVM, onDeleteClick: (BookVM) -> Unit) {
                 shape = RoundedCornerShape(10.dp)
             )
             .padding(16.dp)
+            .then(modifier)
     ) {
         Column {
             Row(

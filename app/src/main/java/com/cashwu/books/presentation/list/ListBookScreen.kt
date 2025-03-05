@@ -1,6 +1,7 @@
 package com.cashwu.books.presentation.list
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,14 +44,16 @@ fun ListBookScreen(navController: NavController, booksViewModel: ListBooksViewMo
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                navController.navigate(Screen.AddEditBooksScreen.route)
-            },
-                modifier = Modifier.background(Color.White)) {
+            FloatingActionButton(
+                onClick = {
+                    navController.navigate(Screen.AddEditBooksScreen.route)
+                },
+                modifier = Modifier.background(Color.White)
+            ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add")
             }
         }
-    ){ contentPadding ->
+    ) { contentPadding ->
         Column(
             modifier = Modifier
                 .padding(contentPadding)
@@ -76,9 +79,15 @@ fun ListBookScreen(navController: NavController, booksViewModel: ListBooksViewMo
 
             LazyColumn {
                 items(booksViewModel.books.value) { book ->
-                    BookCard(book, onDeleteClick = {
-                        booksViewModel.onEvent(BookEvent.Delete(book))
-                    })
+                    BookCard(
+                        book,
+                        onDeleteClick = {
+                            booksViewModel.onEvent(BookEvent.Delete(book))
+                        },
+                        modifier = Modifier.clickable {
+                            navController.navigate(Screen.AddEditBooksScreen.route + "?bookId=${book.id}")
+                        }
+                    )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
             }

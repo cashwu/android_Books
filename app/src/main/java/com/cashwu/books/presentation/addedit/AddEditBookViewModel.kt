@@ -4,12 +4,22 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.cashwu.books.presentation.BookVM
+import com.cashwu.books.presentation.components.SortByAuthor
 import com.cashwu.books.utils.addOrUpdateBook
+import com.cashwu.books.utils.getBooks
 
-class AddEditBookViewModel() : ViewModel() {
+class AddEditBookViewModel(bookId: Int = -1) : ViewModel() {
 
     private val _book = mutableStateOf(BookVM())
     val book: State<BookVM> = _book
+
+    private fun findBook(bookId: Int) {
+        _book.value = getBooks(SortByAuthor).find { it.id == bookId } ?: BookVM()
+    }
+
+    init {
+        findBook(bookId)
+    }
 
     fun onEvent(event: AddEditBookEvent) {
         when (event) {
