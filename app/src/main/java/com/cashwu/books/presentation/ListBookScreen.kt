@@ -11,16 +11,23 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.cashwu.books.R
 import com.cashwu.books.presentation.components.BookCard
 import com.cashwu.books.presentation.components.BookEvent
+import com.cashwu.books.presentation.components.SortByAuthor
 import com.cashwu.books.presentation.components.SortOptions
+import com.cashwu.books.presentation.components.SortOrder
 
 /**
  *
@@ -29,11 +36,10 @@ import com.cashwu.books.presentation.components.SortOptions
  *
  */
 @Composable
-fun ListBookScreen(booksViewModel: ListBooksViewModel, innerPadding: PaddingValues) {
+fun ListBookScreen(navController: NavController, booksViewModel: ListBooksViewModel) {
 
     Column(
         modifier = Modifier
-            .padding(innerPadding)
             .padding(horizontal = 8.dp)
             .fillMaxSize()
     ) {
