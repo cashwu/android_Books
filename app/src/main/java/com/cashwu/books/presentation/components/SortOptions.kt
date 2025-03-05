@@ -55,5 +55,6 @@ data class NotesState(
 )
 
 sealed class BookEvent {
-    data class Order(val order: SortOrder)
+    data class Order(val order: SortOrder) : BookEvent()
+    data class Delete(val book: BookVM) : BookEvent()
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,8 +35,7 @@ import com.cashwu.books.presentation.components.SortOrder
  *
  */
 @Composable
-fun ListBookScreen(books: List<BookVM>, innerPadding: PaddingValues) {
-    val localBooks = remember { mutableStateOf(sortBooks(books, BookEvent.Order(SortByAuthor))) }
+fun ListBookScreen(booksViewModel: ListBooksViewModel, innerPadding: PaddingValues) {
 
     Column(
         modifier = Modifier
@@ -57,23 +57,19 @@ fun ListBookScreen(books: List<BookVM>, innerPadding: PaddingValues) {
             mutableStateOf(SortByAuthor)
         }
 
-        SortOptions(bookOrder = sortOrder, onSortOrderChange = { order ->
-            sortOrder = order
-            localBooks.value = sortBooks(localBooks.value, BookEvent.Order(order))
-        })
+//        SortOptions(bookOrder = sortOrder, onSortOrderChange = { order ->
+//            sortOrder = order
+//            localBooks.value = sortBooks(localBooks.value, BookEvent.Order(order))
+//        })
 
         Spacer(modifier = Modifier.height(8.dp))
 
         LazyColumn {
-
-            localBooks.value.forEach { book ->
-                item {
-                    BookCard(book) {
-                        println("delete book")
-                        localBooks.value = localBooks.value.filter { it != book }
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
-                }
+            items(booksViewModel.books.value) { book ->
+                BookCard(book, onDeleteClick = {
+                    booksViewModel.onEvent(BookEvent.Delete(book))
+                })
+                Spacer(modifier = Modifier.height(8.dp))
             }
         }
 
