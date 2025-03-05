@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -35,6 +36,9 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(route = Screen.BookListScreen.route) {
                             val books: ListBooksViewModel by viewModels()
+                            LaunchedEffect(key1 = true) {
+                                books.refreshBooks()
+                            }
                             ListBookScreen(navController, books)
                         }
 

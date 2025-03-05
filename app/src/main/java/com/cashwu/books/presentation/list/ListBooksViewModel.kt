@@ -44,8 +44,11 @@ class ListBooksViewModel : ViewModel() {
         }
     }
 
+    fun refreshBooks() {
+        _books.value = loadBooks(sortOrder.value)
+    }
+
     private fun deleteBook(book: BookVM) {
         _books.value = _books.value.filter { it != book }
-
     }
 }
