@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.cashwu.books.presentation.components.BookEvent
 import com.cashwu.books.presentation.components.SortByAuthor
 import com.cashwu.books.presentation.components.SortOrder
+import com.cashwu.books.presentation.list.BookVM
 import com.cashwu.books.utils.getBooks
 
 /**

@@ -12,10 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.cashwu.books.presentation.ListBookScreen
+import com.cashwu.books.presentation.list.ListBookScreen
 import com.cashwu.books.presentation.ListBooksViewModel
+import com.cashwu.books.presentation.addedit.AddEditBookViewModel
 import com.cashwu.books.ui.theme.BooksTheme
 import com.cashwu.books.utils.Screen
+import com.knowledgespike.books.presentation.addedit.AddEditBookScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +36,11 @@ class MainActivity : ComponentActivity() {
                         composable(route = Screen.BookListScreen.route) {
                             val books: ListBooksViewModel by viewModels()
                             ListBookScreen(navController, books)
+                        }
+
+                        composable(route = Screen.AddEditBooksScreen.route) {
+                            val books: AddEditBookViewModel by viewModels()
+                            AddEditBookScreen(navController, books)
                         }
                     }
                 }

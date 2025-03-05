@@ -3,4 +3,5 @@
     <string name="greeting">Hello</string>
     <string name="delete">delete</string>
     <string name="main_heading">Books</string>
+    <string name="add_edit_book">add edit book</string>
 </resources>
