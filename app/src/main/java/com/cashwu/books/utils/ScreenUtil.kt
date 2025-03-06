@@ -1,12 +1,15 @@
 package com.cashwu.books.utils
 
+import kotlinx.serialization.Serializable
+
 /**
  *
  * @author cash.wu
  * @since 2025/03/05
  *
  */
-sealed class Screen(val route: String) {
-    data object BookListScreen : Screen("books_list_screen")
-    data object AddEditBooksScreen : Screen("add_edit_book_screen")
-}
+@Serializable
+object BookListScreen
+
+@Serializable
+data class AddEditBooksScreen(val bookId: Int)

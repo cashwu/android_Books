@@ -29,7 +29,7 @@ import com.cashwu.books.presentation.addedit.AddEditBookViewModel
 import com.cashwu.books.presentation.components.HorizontalTextRadioButton
 import com.cashwu.books.presentation.Fiction
 import com.cashwu.books.presentation.NonFiction
-import com.cashwu.books.utils.Screen
+import com.cashwu.books.utils.BookListScreen
 
 @Composable
 fun AddEditBookScreen(
@@ -42,7 +42,7 @@ fun AddEditBookScreen(
             FloatingActionButton(
                 onClick = {
                     viewModel.onEvent(AddEditBookEvent.SaveBook)
-                    navController.navigate(Screen.BookListScreen.route)
+                    navController.navigate(BookListScreen)
                 },
             )
             {

@@ -30,7 +30,7 @@ import com.cashwu.books.R
 import com.cashwu.books.presentation.components.BookCard
 import com.cashwu.books.presentation.components.BookEvent
 import com.cashwu.books.presentation.components.SortOptions
-import com.cashwu.books.utils.Screen
+import com.cashwu.books.utils.AddEditBooksScreen
 
 /**
  *
@@ -46,7 +46,7 @@ fun ListBookScreen(navController: NavController, booksViewModel: ListBooksViewMo
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate(Screen.AddEditBooksScreen.route)
+                    navController.navigate(AddEditBooksScreen(-1))
                 },
                 modifier = Modifier.background(Color.White)
             ) {
@@ -85,7 +85,7 @@ fun ListBookScreen(navController: NavController, booksViewModel: ListBooksViewMo
                             booksViewModel.onEvent(BookEvent.Delete(book))
                         },
                         modifier = Modifier.clickable {
-                            navController.navigate(Screen.AddEditBooksScreen.route + "?bookId=${book.id}")
+                            navController.navigate(AddEditBooksScreen(book.id))
                         }
                     )
                     Spacer(modifier = Modifier.height(8.dp))
