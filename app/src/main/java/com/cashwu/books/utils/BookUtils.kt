@@ -44,6 +44,9 @@ fun getBooks(orderBy: SortOrder) = flow {
 }
 
 fun addOrUpdateBook(book: BookVM) {
+
+//    throw BookException("Book already exists")
+
     val existingBook = booksList.find { it.id == book.id }
 
     existingBook?.let {

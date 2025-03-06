@@ -16,8 +16,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -29,7 +33,9 @@ import com.cashwu.books.presentation.addedit.AddEditBookViewModel
 import com.cashwu.books.presentation.components.HorizontalTextRadioButton
 import com.cashwu.books.presentation.Fiction
 import com.cashwu.books.presentation.NonFiction
+import com.cashwu.books.presentation.addedit.AddEditBookUiEvent
 import com.cashwu.books.utils.BookListScreen
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun AddEditBookScreen(
@@ -37,12 +43,14 @@ fun AddEditBookScreen(
     viewModel: AddEditBookViewModel
 ) {
 
+    val snackbarHostState = remember { SnackbarHostState() }
+
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
                     viewModel.onEvent(AddEditBookEvent.SaveBook)
-                    navController.navigate(BookListScreen)
                 },
             )
             {
@@ -50,6 +58,19 @@ fun AddEditBookScreen(
             }
         }
     ) { contentPadding ->
+
+        LaunchedEffect(true) {
+            viewModel.eventFlow.collectLatest { event ->
+                when (event) {
+                    AddEditBookUiEvent.SaveBook -> navController.navigate(BookListScreen)
+                    is AddEditBookUiEvent.ShowMessage -> {
+                        snackbarHostState.showSnackbar(message = event.message)
+                    }
+                }
+            }
+        }
+
+
         val book = viewModel.book.value
         Column(
             modifier = Modifier
