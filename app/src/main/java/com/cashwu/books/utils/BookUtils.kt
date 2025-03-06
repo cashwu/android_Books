@@ -8,6 +8,7 @@ import com.cashwu.books.presentation.components.SortByFictional
 import com.cashwu.books.presentation.components.SortByRead
 import com.cashwu.books.presentation.components.SortByTitle
 import com.cashwu.books.presentation.components.SortOrder
+import kotlinx.coroutines.flow.flow
 
 private val booksList: MutableList<BookVM> = mutableListOf(
     BookVM(id = 1, title = "Catch-22", author = "Joeseph Heller", read = true),
@@ -29,13 +30,17 @@ private val booksList: MutableList<BookVM> = mutableListOf(
     ),
 )
 
-fun getBooks(orderBy: SortOrder): List<BookVM> {
-    return when(orderBy) {
+fun getBooks(bookId : Int) : BookVM? {
+    return booksList.find { it.id == bookId }
+}
+
+fun getBooks(orderBy: SortOrder) = flow {
+    emit(when(orderBy) {
         SortByAuthor -> booksList.sortedBy { it.author }
         SortByFictional -> booksList.sortedBy { it.bookType == Fiction }
         SortByRead -> booksList.sortedBy { it.read }
         SortByTitle -> booksList.sortedBy { it.title }
-    }
+    })
 }
 
 fun addOrUpdateBook(book: BookVM) {

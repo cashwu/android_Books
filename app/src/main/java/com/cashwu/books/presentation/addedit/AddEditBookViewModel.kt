@@ -14,7 +14,7 @@ class AddEditBookViewModel(bookId: Int = -1) : ViewModel() {
     val book: State<BookVM> = _book
 
     private fun findBook(bookId: Int) {
-        _book.value = getBooks(SortByAuthor).find { it.id == bookId } ?: BookVM()
+        _book.value = getBooks(bookId) ?: BookVM()
     }
 
     init {
