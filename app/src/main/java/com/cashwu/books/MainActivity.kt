@@ -15,6 +15,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import androidx.room.Room
+import com.cashwu.books.data.source.BooksDatabase
 import com.cashwu.books.presentation.addedit.AddEditBookViewModel
 import com.cashwu.books.presentation.list.ListBookScreen
 import com.cashwu.books.presentation.list.ListBooksViewModel
@@ -24,6 +26,15 @@ import com.cashwu.books.utils.BookListScreen
 import com.knowledgespike.books.presentation.addedit.AddEditBookScreen
 
 class MainActivity : ComponentActivity() {
+
+    private val db by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            BooksDatabase::class.java,
+            BooksDatabase.DATABASE_NAME
+        ).build()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -38,18 +49,22 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable<BookListScreen> {
-                            val books: ListBooksViewModel by viewModels()
-                            LaunchedEffect(key1 = true) {
-                                books.refreshBooks()
+//                            val books: ListBooksViewModel by viewModels()
+                            val books = viewModel<ListBooksViewModel> {
+                                ListBooksViewModel(db.dao)
                             }
+//                            LaunchedEffect(key1 = true) {
+//                                books.refreshBooks()
+//                            }
                             ListBookScreen(navController, books)
                         }
 
                         composable<AddEditBooksScreen> { navBackStackEntry ->
 
-                            val args : AddEditBooksScreen = navBackStackEntry.toRoute<AddEditBooksScreen>()
+                            val args: AddEditBooksScreen =
+                                navBackStackEntry.toRoute<AddEditBooksScreen>()
 
-                            val books = viewModel<AddEditBookViewModel>(){
+                            val books = viewModel<AddEditBookViewModel>() {
                                 AddEditBookViewModel(args.bookId)
                             }
                             AddEditBookScreen(navController, books)
