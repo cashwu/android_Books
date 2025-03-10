@@ -14,10 +14,12 @@ import com.cashwu.books.presentation.components.SortByFictional
 import com.cashwu.books.presentation.components.SortByRead
 import com.cashwu.books.presentation.components.SortByTitle
 import com.cashwu.books.presentation.components.SortOrder
+import com.cashwu.books.presentation.toEntity
 import com.cashwu.books.utils.getBooks
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 /**
  *
@@ -78,11 +80,11 @@ class ListBooksViewModel(val dao: BooksDao) : ViewModel() {
         }
     }
 
-    fun refreshBooks() {
-        loadBooks(sortOrder.value)
-    }
-
     private fun deleteBook(book: BookVM) {
-        _books.value = _books.value.filter { it != book }
+//        _books.value = _books.value.filter { it != book }
+
+        viewModelScope.launch {
+            dao.deleteBook(book.toEntity())
+        }
     }
 }

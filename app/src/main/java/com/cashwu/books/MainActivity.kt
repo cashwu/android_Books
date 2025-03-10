@@ -47,13 +47,9 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable<BookListScreen> {
-//                            val books: ListBooksViewModel by viewModels()
                             val books = viewModel<ListBooksViewModel> {
                                 ListBooksViewModel(db.dao)
                             }
-//                            LaunchedEffect(key1 = true) {
-//                                books.refreshBooks()
-//                            }
                             ListBookScreen(navController, books)
                         }
 
