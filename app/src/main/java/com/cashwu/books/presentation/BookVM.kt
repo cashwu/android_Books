@@ -21,8 +21,9 @@ data class BookVM(
     val read: Boolean = false,
     val bookType: BookType = Fiction
 ) {
+
     companion object {
-        fun fromEntity(entity: Book) : BookVM {
+        fun fromEntity(entity: Book): BookVM {
             return BookVM(
                 id = entity.id!!,
                 title = entity.title,
@@ -34,23 +35,22 @@ data class BookVM(
     }
 }
 
-//fun BookVM.toEntity(): Book {
-//    val id = if (this.id == -1) null else this.id
-//    return Book(
-//        id = id,
-//        author = this.author,
-//        title = this.title,
-//        read = this.read,
-//        bookType = bookType.toInt()
-//    )
-//}
-//
-//private fun BookType.toInt(): Int =
-//    when (this) {
-//        Fiction -> 0
-//        NonFiction -> 1
-//    }
+fun BookVM.toEntity(): Book {
+    val id = if (this.id == -1) null else this.id
+    return Book(
+        id = id,
+        author = this.author,
+        title = this.title,
+        read = this.read,
+        bookType = bookType.toInt()
+    )
+}
 
+private fun BookType.toInt(): Int =
+    when (this) {
+        Fiction -> 0
+        NonFiction -> 1
+    }
 
 sealed class BookType(val backgroundColor: Color, val foregroundColor: Color) {
     companion object {
@@ -60,5 +60,5 @@ sealed class BookType(val backgroundColor: Color, val foregroundColor: Color) {
     }
 }
 
-data object Fiction: BookType(Purple80, PurpleGrey40)
-data object NonFiction: BookType(Purple40, PurpleGrey80)
+data object Fiction : BookType(Purple80, PurpleGrey40)
+data object NonFiction : BookType(Purple40, PurpleGrey80)

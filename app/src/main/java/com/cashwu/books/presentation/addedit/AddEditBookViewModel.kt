@@ -3,19 +3,18 @@ package com.cashwu.books.presentation.addedit
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.viewModelScope
+import com.cashwu.books.data.source.BooksDao
 import com.cashwu.books.presentation.BookVM
-import com.cashwu.books.presentation.components.SortByAuthor
+import com.cashwu.books.presentation.toEntity
 import com.cashwu.books.utils.BookException
 import com.cashwu.books.utils.addOrUpdateBook
 import com.cashwu.books.utils.getBooks
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
-class AddEditBookViewModel(bookId: Int = -1) : ViewModel() {
+class AddEditBookViewModel(val dao: BooksDao, bookId: Int = -1) : ViewModel() {
 
     private val _book = mutableStateOf(BookVM())
     val book: State<BookVM> = _book
@@ -24,7 +23,13 @@ class AddEditBookViewModel(bookId: Int = -1) : ViewModel() {
     val eventFlow = _eventFlow.asSharedFlow()
 
     private fun findBook(bookId: Int) {
-        _book.value = getBooks(bookId) ?: BookVM()
+
+        viewModelScope.launch {
+           val bookEntity = dao.getBook(bookId)
+            _book.value = bookEntity?.let { BookVM.fromEntity(it) } ?: BookVM()
+        }
+
+//        _book.value = getBooks(bookId) ?: BookVM()
     }
 
     init {
@@ -48,13 +53,19 @@ class AddEditBookViewModel(bookId: Int = -1) : ViewModel() {
 
             AddEditBookEvent.SaveBook -> {
                 viewModelScope.launch {
+//                    try {
+//                        addOrUpdateBook(book.value)
+//                        _eventFlow.emit(AddEditBookUiEvent.SaveBook)
+//                    } catch (e: BookException) {
+//                        _eventFlow.emit(AddEditBookUiEvent.ShowMessage(e.message!!))
+//                    }
 
-                    try {
-                        addOrUpdateBook(book.value)
+                    if (book.value.title.isEmpty() || book.value.author.isEmpty()) {
+                        _eventFlow.emit(AddEditBookUiEvent.ShowMessage("unable to save book"))
+                    } else {
+                        val entity = book.value.toEntity()
+                        dao.upsertBook(entity)
                         _eventFlow.emit(AddEditBookUiEvent.SaveBook)
-                    } catch (e: BookException) {
-                        _eventFlow.emit(AddEditBookUiEvent.ShowMessage(e.message!!))
-
                     }
                 }
             }
