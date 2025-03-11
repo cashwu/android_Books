@@ -8,20 +8,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
 import androidx.room.Room
 import com.cashwu.books.data.source.BooksDatabase
-import com.cashwu.books.presentation.addedit.AddEditBookViewModel
 import com.cashwu.books.presentation.list.ListBookScreen
-import com.cashwu.books.presentation.list.ListBooksViewModel
 import com.cashwu.books.ui.theme.BooksTheme
 import com.cashwu.books.utils.AddEditBooksScreen
 import com.cashwu.books.utils.BookListScreen
-import com.knowledgespike.books.presentation.addedit.AddEditBookScreen
+import com.cashwu.books.presentation.addedit.AddEditBookScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -47,21 +43,21 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable<BookListScreen> {
-                            val books = viewModel<ListBooksViewModel> {
-                                ListBooksViewModel(db.dao)
-                            }
-                            ListBookScreen(navController, books)
+//                            val books = viewModel<ListBooksViewModel> {
+//                                ListBooksViewModel(db.dao)
+//                            }
+                            ListBookScreen(navController)
                         }
 
                         composable<AddEditBooksScreen> { navBackStackEntry ->
 
-                            val args: AddEditBooksScreen =
-                                navBackStackEntry.toRoute<AddEditBooksScreen>()
-
-                            val books = viewModel<AddEditBookViewModel>() {
-                                AddEditBookViewModel(db.dao, args.bookId)
-                            }
-                            AddEditBookScreen(navController, books)
+//                            val args: AddEditBooksScreen =
+//                                navBackStackEntry.toRoute<AddEditBooksScreen>()
+//
+//                            val books = viewModel<AddEditBookViewModel>() {
+//                                AddEditBookViewModel(db.dao, args.bookId)
+//                            }
+                            AddEditBookScreen(navController)
                         }
                     }
                 }

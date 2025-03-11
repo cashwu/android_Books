@@ -29,6 +29,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cashwu.books.R
 import com.cashwu.books.presentation.components.BookCard
@@ -45,7 +46,7 @@ import kotlinx.coroutines.launch
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListBookScreen(navController: NavController, booksViewModel: ListBooksViewModel) {
+fun ListBookScreen(navController: NavController, booksViewModel: ListBooksViewModel = hiltViewModel()) {
 
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()

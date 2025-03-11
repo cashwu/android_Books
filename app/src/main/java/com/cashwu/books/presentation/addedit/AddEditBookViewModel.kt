@@ -2,16 +2,22 @@ package com.cashwu.books.presentation.addedit
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cashwu.books.domain.usecase.BooksUseCases
 import com.cashwu.books.presentation.BookVM
 import com.cashwu.books.presentation.toEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AddEditBookViewModel(val booksUseCases: BooksUseCases, bookId: Int = -1) : ViewModel() {
+@HiltViewModel
+class AddEditBookViewModel @Inject constructor
+    (private val booksUseCases: BooksUseCases,
+     savedStateHandle: SavedStateHandle) : ViewModel() {
 
     private val _book = mutableStateOf(BookVM())
     val book: State<BookVM> = _book
@@ -28,6 +34,7 @@ class AddEditBookViewModel(val booksUseCases: BooksUseCases, bookId: Int = -1) :
     }
 
     init {
+        val bookId = savedStateHandle.get<Int>("bookId") ?: -1
         findBook(bookId)
     }
 

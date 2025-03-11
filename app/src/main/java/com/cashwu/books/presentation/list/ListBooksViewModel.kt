@@ -11,10 +11,12 @@ import com.cashwu.books.presentation.components.BookEvent
 import com.cashwu.books.presentation.components.SortByAuthor
 import com.cashwu.books.presentation.components.SortOrder
 import com.cashwu.books.presentation.toEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  *
@@ -22,7 +24,9 @@ import kotlinx.coroutines.launch
  * @since 2025/03/05
  *
  */
-class ListBooksViewModel(val booksUseCases: BooksUseCases) : ViewModel() {
+@HiltViewModel
+class ListBooksViewModel @Inject constructor
+    (private val booksUseCases: BooksUseCases) : ViewModel() {
 
     private val _books: MutableState<List<BookVM>> = mutableStateOf(emptyList())
     var books: State<List<BookVM>> = _books

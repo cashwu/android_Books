@@ -1,4 +1,4 @@
-package com.knowledgespike.books.presentation.addedit
+package com.cashwu.books.presentation.addedit
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -26,21 +26,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.cashwu.books.R
-import com.cashwu.books.presentation.addedit.AddEditBookEvent
-import com.cashwu.books.presentation.addedit.AddEditBookViewModel
 import com.cashwu.books.presentation.components.HorizontalTextRadioButton
 import com.cashwu.books.presentation.Fiction
 import com.cashwu.books.presentation.NonFiction
-import com.cashwu.books.presentation.addedit.AddEditBookUiEvent
 import com.cashwu.books.utils.BookListScreen
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun AddEditBookScreen(
     navController: NavHostController,
-    viewModel: AddEditBookViewModel
+    viewModel: AddEditBookViewModel = hiltViewModel()
 ) {
 
     val snackbarHostState = remember { SnackbarHostState() }
