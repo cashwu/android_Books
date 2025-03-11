@@ -18,7 +18,9 @@ import com.cashwu.books.ui.theme.BooksTheme
 import com.cashwu.books.utils.AddEditBooksScreen
 import com.cashwu.books.utils.BookListScreen
 import com.cashwu.books.presentation.addedit.AddEditBookScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val db by lazy {
