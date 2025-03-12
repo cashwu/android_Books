@@ -10,8 +10,10 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.test.printToLog
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -149,11 +151,18 @@ class ListScreenIntegrationTest {
         composeRule.onNodeWithTag(TestTags.ADD_EDIT_TITLE_FIELD)
             .performTextInput("2")
 
+        composeRule.onNodeWithTag(TestTags.ADD_EDIT_TITLE_FIELD)
+            .printToLog("TEST")
+
         composeRule.onNodeWithContentDescription("Save book")
             .performClick()
 
         // list screen
         composeRule.onNodeWithText("2test title")
             .assertIsDisplayed()
+
+//        composeRule.onRoot()
+//            .printToLog("TEST")
+
     }
 }
