@@ -37,48 +37,36 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
+//            BooksTheme {
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    Greeting(
+//                        name = "Android",
+//                        modifier = Modifier
+//                            .padding(innerPadding)
+//                            .fillMaxSize()
+//                    )
+//                }
+//            }
+
             BooksTheme {
-
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .fillMaxSize()
-                    )
+                    val navController = rememberNavController()
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = BookListScreen,
+                        modifier = Modifier.padding(innerPadding)
+                    ) {
+                        composable<BookListScreen> {
+                            ListBookScreen(navController)
+                        }
+
+                        composable<AddEditBooksScreen> { navBackStackEntry ->
+                            AddEditBookScreen(navController)
+                        }
+                    }
                 }
-
             }
-
-            /*            BooksTheme {
-                            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                                val navController = rememberNavController()
-
-                                NavHost(
-                                    navController = navController,
-                                    startDestination = BookListScreen,
-                                    modifier = Modifier.padding(innerPadding)
-                                ) {
-                                    composable<BookListScreen> {
-            //                            val books = viewModel<ListBooksViewModel> {
-            //                                ListBooksViewModel(db.dao)
-            //                            }
-                                        ListBookScreen(navController)
-                                    }
-
-                                    composable<AddEditBooksScreen> { navBackStackEntry ->
-
-            //                            val args: AddEditBooksScreen =
-            //                                navBackStackEntry.toRoute<AddEditBooksScreen>()
-            //
-            //                            val books = viewModel<AddEditBookViewModel>() {
-            //                                AddEditBookViewModel(db.dao, args.bookId)
-            //                            }
-                                        AddEditBookScreen(navController)
-                                    }
-                                }
-                            }
-                        }*/
         }
     }
 }

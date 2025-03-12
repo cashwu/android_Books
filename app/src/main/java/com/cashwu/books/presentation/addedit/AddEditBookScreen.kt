@@ -24,6 +24,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -33,6 +34,7 @@ import com.cashwu.books.presentation.components.HorizontalTextRadioButton
 import com.cashwu.books.presentation.Fiction
 import com.cashwu.books.presentation.NonFiction
 import com.cashwu.books.utils.BookListScreen
+import com.cashwu.books.utils.test.TestTags
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -91,7 +93,7 @@ fun AddEditBookScreen(
                 },
                 singleLine = true,
                 textStyle = MaterialTheme.typography.headlineMedium.copy(color = book.bookType.foregroundColor),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().testTag(TestTags.ADD_EDIT_AUTHOR_FIELD)
             )
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
@@ -102,7 +104,7 @@ fun AddEditBookScreen(
                 },
                 singleLine = true,
                 textStyle = MaterialTheme.typography.headlineMedium.copy(color = book.bookType.foregroundColor),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().testTag(TestTags.ADD_EDIT_TITLE_FIELD)
             )
             Spacer(modifier = Modifier.height(16.dp))
             Row(modifier = Modifier.fillMaxWidth()) {

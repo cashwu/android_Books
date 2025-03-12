@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -36,6 +37,7 @@ import com.cashwu.books.presentation.components.BookCard
 import com.cashwu.books.presentation.components.BookEvent
 import com.cashwu.books.presentation.components.SortOptions
 import com.cashwu.books.utils.AddEditBooksScreen
+import com.cashwu.books.utils.test.TestTags
 import kotlinx.coroutines.launch
 
 /**
@@ -46,12 +48,15 @@ import kotlinx.coroutines.launch
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListBookScreen(navController: NavController, booksViewModel: ListBooksViewModel = hiltViewModel()) {
+fun ListBookScreen(
+    navController: NavController,
+    booksViewModel: ListBooksViewModel = hiltViewModel()
+) {
 
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     Scaffold(
-        snackbarHost = { SnackbarHost(snackbarHostState)},
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
@@ -98,7 +103,7 @@ fun ListBookScreen(navController: NavController, booksViewModel: ListBooksViewMo
                         },
                         modifier = Modifier.clickable {
                             navController.navigate(AddEditBooksScreen(book.id))
-                        }
+                        }.testTag(TestTags.BOOK_CARD)
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
