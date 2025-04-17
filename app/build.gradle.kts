@@ -68,6 +68,10 @@ dependencies {
     kapt(libs.hilt.android.compiler)
 
     ksp(libs.androidx.room.compiler)
+
+    // OkHttp for WebSocket implementation
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
